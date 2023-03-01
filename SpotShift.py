@@ -71,27 +71,21 @@ def transferToGOOGspotify(url):
 
   tracks = session.playlist_tracks(playlist_uri)["items"]
 
-  with open("a.csv", "w", encoding="utf-8") as file:
-    writer = csv.writer(file)
+  # extract name and artist
+  for track in tracks:
+    name = track["track"]["name"]
+    artists = ", ".join(
+      [artist["name"] for artist in track["track"]["artists"]])
 
-    # write header column names
-    writer.writerow(["track", "artist"])
+    # write to csv
+    writer.writerow([name, artists])
+    print([name, artists])
 
-    # extract name and artist
-    for track in tracks:
-      name = track["track"]["name"]
-      artists = ", ".join(
-        [artist["name"] for artist in track["track"]["artists"]])
+    results = music.search(name)
 
-      # write to csv
-      writer.writerow([name, artists])
-      print([name, artists])
+    music.add_playlist_items(playlist, [results[0]['videoId']])
 
-      results = music.search(name)
-
-      music.add_playlist_items(playlist, [results[0]['videoId']])
-
-      # music.add_playlist_items(playlist, [name, artists])
+    # music.add_playlist_items(playlist, [name, artists])
 
   # req.post()
 
