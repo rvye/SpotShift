@@ -136,7 +136,7 @@ if sshft == 1:
 elif sshft == 2:
   #transferToGOOGspotify(input("Paste your playlist link here: "))
 
-  dev()
+  dev("https://open.spotify.com/playlist/51nJb8Bw4aZGCgweWm24Ry?si=-7RPgFlvT8uV7fvz5yoayw")
 elif sshft == 3:
   transferToSpotifyAAPL("apple to spotify")
 elif sshft == 4:
