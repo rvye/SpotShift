@@ -18,9 +18,7 @@
 # -*- coding: utf-8 -*-
 
 from ytmusicapi import YTMusic
-import requests as req
 import spotipy as sp
-import csv
 import sys
 import os
 import re
@@ -43,7 +41,7 @@ print(
   " ___           _   ___ _    _  __ _\n/ __|_ __  ___| |_/ __| |_ (_)/ _| |_\n\\__ \ '_ \/ _ \\  _\\__ \\ ' \| |  _|  _|\n|___/ .__/\\___/\\__|___/_||_|_|_|  \__|     \n    |_|                               "
 )
 # sshft = int(input("Select a source to transfer from: \n\n[1] Spotify to Apple Music\n[2] Spotify to Youtube Music\n[3] Apple Music to Spotify\n[4] Apple Music to YouTube Music\n[5] YouTube Music to Spotify\n[6] YouTube Music to Apple Music\n\n[0] Quit\n\n"))
-sshft = 2
+sshft = 5
 
 
 def transferToSpotifyAAPL(url):
@@ -51,7 +49,15 @@ def transferToSpotifyAAPL(url):
 
 
 def transferToSpotifyGOOG(url):
-  print(url)
+  if match := re.match(r"https://music.youtube.com/playlist?list=(.*)", url):
+    playlist_uri = match.groups()[0]
+  else: 
+    raise ValueError("Enter a valid YouTube Music link.")
+  
+  music = YTMusic("headers_auth.json")
+
+  music.get_playlist(playlist_uri)
+  playlist = url
 
 
 def transferToGOOGaapl():
@@ -77,18 +83,8 @@ def transferToGOOGspotify(url):
     artists = ", ".join(
       [artist["name"] for artist in track["track"]["artists"]])
 
-    # write to csv
-    writer.writerow([name, artists])
-    print([name, artists])
-
     results = music.search(name)
-
     music.add_playlist_items(playlist, [results[0]['videoId']])
-
-    # music.add_playlist_items(playlist, [name, artists])
-
-  # req.post()
-
 
 def transferToAAPLgoog(url):
   print(url)
