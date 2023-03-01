@@ -18,8 +18,6 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
-import time
 import requests as req
 import random as rdm
 import spotipy as sp
