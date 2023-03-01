@@ -42,42 +42,6 @@ session = sp.Spotify(client_credentials_manager=client_credentials_manager)
 print(
   " ___           _   ___ _    _  __ _\n/ __|_ __  ___| |_/ __| |_ (_)/ _| |_\n\\__ \ '_ \/ _ \\  _\\__ \\ ' \| |  _|  _|\n|___/ .__/\\___/\\__|___/_||_|_|_|  \__|     \n    |_|                               "
 )
-
-
-def dev(url):
-  # Reading from playlist
-    music = YTMusic("headers_auth.json")
-
-    playlist = music.create_playlist("Playlist Transferred from SpotShift", "https://github.com/rvye/spotshift")
-  
-  if match := re.match(r"https://open.spotify.com/playlist/(.*)\?", url):
-    playlist_uri = match.groups()[0]
-  else:
-    raise ValueError("Expected format: https://open.spotify.com/playlist/...")
-
-  tracks = session.playlist_tracks(playlist_uri)["items"]
-
-  with open("a.csv", "w", encoding="utf-8") as file:
-    writer = csv.writer(file)
-
-    # write header column names
-    writer.writerow(["track", "artist"])
-
-    # extract name and artist
-    for track in tracks:
-      name = track["track"]["name"]
-      artists = ", ".join(
-        [artist["name"] for artist in track["track"]["artists"]])
-
-      # write to csv
-      writer.writerow([name, artists])
-      print([name, artists])
-
-      music.add_playlist_items(playlist, [name, artists])
-  
-
-  
-
 # sshft = int(input("Select a source to transfer from: \n\n[1] Spotify to Apple Music\n[2] Spotify to Youtube Music\n[3] Apple Music to Spotify\n[4] Apple Music to YouTube Music\n[5] YouTube Music to Spotify\n[6] YouTube Music to Apple Music\n\n[0] Quit\n\n"))
 sshft = 2
 
@@ -95,6 +59,10 @@ def transferToGOOGaapl():
 
 
 def transferToGOOGspotify(url):
+  music = YTMusic("headers_auth.json")
+
+  playlist = music.create_playlist("Playlist Transferred from SpotShift", "https://github.com/rvye/spotshift")
+  
   # Reading from playlist
   if match := re.match(r"https://open.spotify.com/playlist/(.*)\?", url):
     playlist_uri = match.groups()[0]
@@ -118,6 +86,12 @@ def transferToGOOGspotify(url):
       # write to csv
       writer.writerow([name, artists])
       print([name, artists])
+
+      results = music.search(name)
+
+      music.add_playlist_items(playlist, [results[0]['videoId']])
+
+      # music.add_playlist_items(playlist, [name, artists])
 
   # req.post()
 
@@ -136,7 +110,7 @@ if sshft == 1:
 elif sshft == 2:
   #transferToGOOGspotify(input("Paste your playlist link here: "))
 
-  dev("https://open.spotify.com/playlist/51nJb8Bw4aZGCgweWm24Ry?si=-7RPgFlvT8uV7fvz5yoayw")
+  transferToGOOGspotify("https://open.spotify.com/playlist/51nJb8Bw4aZGCgweWm24Ry?si=-7RPgFlvT8uV7fvz5yoayw")
 elif sshft == 3:
   transferToSpotifyAAPL("apple to spotify")
 elif sshft == 4:
