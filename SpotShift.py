@@ -49,15 +49,12 @@ def transferToSpotifyAAPL(url):
 
 
 def transferToSpotifyGOOG(url):
-  if match := re.match(r"https://music.youtube.com/playlist?list=(.*)", url):
-    playlist_uri = match.groups()[0]
-  else: 
-    raise ValueError("Enter a valid YouTube Music link.")
+  id = url[40:1000]
   
   music = YTMusic("headers_auth.json")
 
-  music.get_playlist(playlist_uri)
-  playlist = url
+  # a = music.get_playlist(id)
+  print(id)
 
 
 def transferToGOOGaapl():
@@ -106,7 +103,7 @@ elif sshft == 3:
 elif sshft == 4:
   transferToGOOGaapl("apple to google")
 elif sshft == 5:
-  transferToSpotifyGOOG("yt to spot")
+  transferToSpotifyGOOG("https://music.youtube.com/playlist?list=PLkBPs14O3q4iPCUUYW9Jsltc9hRRXmYiy")
 elif sshft == 6:
   transferToAAPLgoog("youtube to apple")
 elif sshft == 0:
