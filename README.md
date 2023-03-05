@@ -1,9 +1,10 @@
 # SpotShift
-* iOS and macOS app for transferring songs from Spotify to Apple Music (or Apple Music to Spotify)
+* iOS and macOS app for transferring playlists between YouTube and Apple Music
 
-# Thanks
+# How to use
+* Sign in with your Youtube Music, and Spotify accounts
+* Enter a playlist link, and press transfer.
 
-* [Apple](https://github.com/apple) for [iOS](https://apple.com/ios), [macOS](https://apple.com/macos), [Swift](https://apple.com/swift), [Apple Music](https://apple.com/music), and Documentation
-* [Spotify](https://spotify.com) for [Spotify](https://spotify.com)
-* [Dortania](https://github.com/dortania) for making the OpenCore Install Guide
-* [Acidanthera](https://github.com/acidanthera) for making my Hackintosh possible
+# :eyes: Coming soon...
+* Apple Music support (need a license)
+* Web support
