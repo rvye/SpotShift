@@ -25,12 +25,10 @@ import re
 from dotenv import load_dotenv
 from spotipy.oauth2 import SpotifyClientCredentials
 
-# load_dotenv()
+load_dotenv()
 
-# CLIENT_ID = os.getenv("CLIENT_ID", "")
-# CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
-CLIENT_ID = "d92022b036d5409198689c7719bd123c"
-CLIENT_SECRET = "3a85d8d5b7a14e6383935de817a21043"
+CLIENT_ID = os.getenv("CLIENT_ID", "")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
 
 client_credentials_manager = SpotifyClientCredentials(
   client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
@@ -40,28 +38,17 @@ session = sp.Spotify(client_credentials_manager=client_credentials_manager)
 print(
   " ___           _   ___ _    _  __ _\n/ __|_ __  ___| |_/ __| |_ (_)/ _| |_\n\\__ \ '_ \/ _ \\  _\\__ \\ ' \| |  _|  _|\n|___/ .__/\\___/\\__|___/_||_|_|_|  \__|     \n    |_|                               "
 )
-# sshft = int(input("Select a source to transfer from: \n\n[1] Spotify to Apple Music\n[2] Spotify to Youtube Music\n[3] Apple Music to Spotify\n[4] Apple Music to YouTube Music\n[5] YouTube Music to Spotify\n[6] YouTube Music to Apple Music\n\n[0] Quit\n\n"))
-sshft = 5
+# sshft = int(input("Select a source to transfer from: \n\n[1] Spotify to YouTube Music\n[2] YouTube Music to Spotify\n\n[0] Quit\n\n"))
+sshft = 2
 
-
-def transferToSpotifyAAPL(url):
-  print("AAPL")
-
-
-def transferToSpotifyGOOG(url):
+def transferToSpotify(url):
   id = url[40:1000]
   
   music = YTMusic("headers_auth.json")
 
   # a = music.get_playlist(id)
   print(id)
-
-
-def transferToGOOGaapl():
-  print("GA")
-
-
-def transferToGOOGspotify(url):
+def transferToYTM(url):
   music = YTMusic("headers_auth.json")
 
   playlist = music.create_playlist("Playlist Transferred from SpotShift", "https://github.com/rvye/spotshift")
@@ -83,29 +70,18 @@ def transferToGOOGspotify(url):
     results = music.search(name)
     music.add_playlist_items(playlist, [results[0]['videoId']])
 
-def transferToAAPLgoog(url):
-  print(url)
-
-
-def transferToAAPLspot(url):
-  print(url)
-
 
 if sshft == 1:
-  # transferToAAPL(input("Paste your playlist link here: "))
-  transferToAAPLspot("a")
-elif sshft == 2:
-  #transferToGOOGspotify(input("Paste your playlist link here: "))
-
-  transferToGOOGspotify("https://open.spotify.com/playlist/51nJb8Bw4aZGCgweWm24Ry?si=-7RPgFlvT8uV7fvz5yoayw")
-elif sshft == 3:
-  transferToSpotifyAAPL("apple to spotify")
-elif sshft == 4:
-  transferToGOOGaapl("apple to google")
-elif sshft == 5:
-  transferToSpotifyGOOG("https://music.youtube.com/playlist?list=PLkBPs14O3q4iPCUUYW9Jsltc9hRRXmYiy")
-elif sshft == 6:
-  transferToAAPLgoog("youtube to apple")
+  try:
+    transferToYTM(input("Paste your playlist link here: "))
+  except:
+    print("An error occured... Maybe you pasted an invalid playlist link?
+    
+if sshft == 2:
+  try:
+    transferToSpotify(input("Paste your playlist link here: "))
+  except:
+    print("An error occured... Maybe you pasted an invalid playlist link?"
 elif sshft == 0:
   sys.exit()
 else:
