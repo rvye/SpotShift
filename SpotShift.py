@@ -10,7 +10,7 @@
 # SpotShift.py
 # by rvye (rvyeinq@gmail.com)
 #
-# Used for transferring Spotify playlists to Apple Music (or vice-versa)
+# Used for transferring playlists between Spotify and YouTube Music
 #
 # https://github.com/rvye/spotshift
 
@@ -77,12 +77,14 @@ if sshft == 1:
   except:
     print("An error occured... Maybe you pasted an invalid playlist link?
     
-if sshft == 2:
+elif sshft == 2:
   try:
     transferToSpotify(input("Paste your playlist link here: "))
   except:
     print("An error occured... Maybe you pasted an invalid playlist link?"
+          
 elif sshft == 0:
   sys.exit()
+          
 else:
   print("Enter a valid number.")
