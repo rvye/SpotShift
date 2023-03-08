@@ -48,6 +48,7 @@ def transferToSpotify(url):
 
   # a = music.get_playlist(id)
   print(id)
+  
 def transferToYTM(url):
   music = YTMusic("headers_auth.json")
 
@@ -85,6 +86,5 @@ elif sshft == 2:
           
 elif sshft == 0:
   sys.exit()
-          
 else:
   print("Enter a valid number.")
