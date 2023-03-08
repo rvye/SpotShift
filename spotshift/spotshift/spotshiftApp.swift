@@ -1,8 +1,7 @@
 //  ContentView.swift
 //  spotshift
 //
-//  Copyright (c) 2023 rvye
-//  MIT License
+//  @rvye
 //
 //  Created on 3/5/23
 
